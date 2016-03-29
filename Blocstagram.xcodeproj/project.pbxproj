@@ -8,20 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		34DF1DD01CAB277400521ABB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF1DCF1CAB277400521ABB /* AppDelegate.swift */; };
-		34DF1DD21CAB277400521ABB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF1DD11CAB277400521ABB /* ViewController.swift */; };
-		34DF1DD51CAB277400521ABB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34DF1DD31CAB277400521ABB /* Main.storyboard */; };
 		34DF1DD71CAB277400521ABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DF1DD61CAB277400521ABB /* Assets.xcassets */; };
-		34DF1DDA1CAB277400521ABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34DF1DD81CAB277400521ABB /* LaunchScreen.storyboard */; };
+		34E4DE3B1CAB2A0100F55855 /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E4DE3A1CAB2A0100F55855 /* ImagesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		34DF1DCC1CAB277400521ABB /* Blocstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34DF1DCF1CAB277400521ABB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		34DF1DD11CAB277400521ABB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		34DF1DD41CAB277400521ABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		34DF1DD61CAB277400521ABB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		34DF1DD91CAB277400521ABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		34DF1DDB1CAB277400521ABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34E4DE3A1CAB2A0100F55855 /* ImagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +51,9 @@
 			isa = PBXGroup;
 			children = (
 				34DF1DCF1CAB277400521ABB /* AppDelegate.swift */,
-				34DF1DD11CAB277400521ABB /* ViewController.swift */,
-				34DF1DD31CAB277400521ABB /* Main.storyboard */,
 				34DF1DD61CAB277400521ABB /* Assets.xcassets */,
-				34DF1DD81CAB277400521ABB /* LaunchScreen.storyboard */,
 				34DF1DDB1CAB277400521ABB /* Info.plist */,
+				34E4DE3A1CAB2A0100F55855 /* ImagesTableViewController.swift */,
 			);
 			path = Blocstagram;
 			sourceTree = "<group>";
@@ -122,9 +116,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34DF1DDA1CAB277400521ABB /* LaunchScreen.storyboard in Resources */,
 				34DF1DD71CAB277400521ABB /* Assets.xcassets in Resources */,
-				34DF1DD51CAB277400521ABB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,31 +127,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34DF1DD21CAB277400521ABB /* ViewController.swift in Sources */,
+				34E4DE3B1CAB2A0100F55855 /* ImagesTableViewController.swift in Sources */,
 				34DF1DD01CAB277400521ABB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		34DF1DD31CAB277400521ABB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				34DF1DD41CAB277400521ABB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		34DF1DD81CAB277400521ABB /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				34DF1DD91CAB277400521ABB /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		34DF1DDC1CAB277400521ABB /* Debug */ = {
@@ -286,6 +259,7 @@
 				34DF1DE01CAB277400521ABB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
