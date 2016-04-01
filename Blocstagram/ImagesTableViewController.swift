@@ -32,7 +32,7 @@ class ImagesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,17 +44,17 @@ class ImagesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath)
 
         let imageViewTag = 1234
-        let imageView = cell.contentView.viewWithTag(imageViewTag) as! UIImageView?
-        
+        var imageView = cell.contentView.viewWithTag(imageViewTag) as! UIImageView?
+    
         if let _ = imageView {
         } else {
-            let imageView = UIImageView()
-            imageView.contentMode = .ScaleAspectFill
-            imageView.frame = cell.contentView.bounds
-            imageView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+            imageView = UIImageView()
+            imageView!.contentMode = .ScaleAspectFill
+            imageView!.frame = cell.contentView.bounds
+            imageView!.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
             
-            imageView.tag = imageViewTag
-            cell.contentView.addSubview(imageView)
+            imageView!.tag = imageViewTag
+            cell.contentView.addSubview(imageView!)
         }
         
         let image = self.images[indexPath.row];
