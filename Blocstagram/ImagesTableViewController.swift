@@ -14,12 +14,15 @@ class ImagesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("IN VIEW DID LOAD")
         for i in 1...10 {
+            print(i)
             let imageName = "\(i).jpg"
             let image = UIImage(imageLiteral: imageName)
             self.images.append(image)
         }
+        
+        self.images.removeAtIndex(0)
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "imageCell")
     }
@@ -61,6 +64,12 @@ class ImagesTableViewController: UITableViewController {
         imageView!.image = image;
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        let image = self.images[indexPath.row]
+        return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height
     }
     
 
