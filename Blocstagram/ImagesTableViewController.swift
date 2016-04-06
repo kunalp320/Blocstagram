@@ -10,19 +10,9 @@ import UIKit
 
 class ImagesTableViewController: UITableViewController {
 
-    var images = [UIImage()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        for i in 1...10 {
-            print(i)
-            let imageName = "\(i).jpg"
-            let image = UIImage(imageLiteral: imageName)
-            self.images.append(image)
-        }
-        
-        self.images.removeAtIndex(0)
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "imageCell")
     }
@@ -39,7 +29,7 @@ class ImagesTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.images.count
+        return DataSource.sharedInstance.mediaItems.count
     }
 
     
@@ -61,16 +51,17 @@ class ImagesTableViewController: UITableViewController {
                 return imageView
             }
         }
-        
-        let image = self.images[indexPath.row];
-        imageView!.image = image;
+        let item = DataSource.sharedInstance.mediaItems[indexPath.row]
+        imageView.image = item.image
         
         return cell
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        let image = self.images[indexPath.row]
+        let item = DataSource.sharedInstance.mediaItems[indexPath.row]
+        let image = item.image
+        
         return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height
     }
     
@@ -84,7 +75,7 @@ class ImagesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            images.removeAtIndex(indexPath.row)
+            DataSource.sharedInstance.mediaItems..removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 
         }

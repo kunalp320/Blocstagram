@@ -11,7 +11,7 @@ import UIKit
 class DataSource: NSObject {
 
     static let sharedInstance = DataSource()
-    var mediaItems = []
+    var mediaItems = [Media]
     
     
     override init() {
