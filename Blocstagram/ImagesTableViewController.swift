@@ -38,11 +38,9 @@ class ImagesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath)
-
-        let imageViewTag = 1234
         let imageView = {
             Void -> UIImageView in
-            
+            let imageViewTag = 1234
             if let imageView = cell.contentView.viewWithTag(imageViewTag) as! UIImageView? {
                 return imageView
             } else {

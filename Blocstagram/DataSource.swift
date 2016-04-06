@@ -65,8 +65,7 @@ class DataSource {
     
     func addRandomData() {
         var randomMediaItems : [Media] = []
-        
-        
+
         let images = (1...10).map({"\($0).jpg"}).map({UIImage(named: $0)}).filter({$0 != nil}).map({$0!})
         
         for image in images {
@@ -82,7 +81,6 @@ class DataSource {
             randomMediaItems.append(media)
         }
         self.mediaItems = randomMediaItems
-
     }
     
 }
