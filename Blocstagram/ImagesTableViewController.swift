@@ -10,6 +10,7 @@ import UIKit
 
 class ImagesTableViewController: UITableViewController {
 
+    let items = DataSource.sharedInstance.mediaItems
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class ImagesTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataSource.sharedInstance.mediaItems.count
+        return items.count
     }
 
     
@@ -51,16 +52,15 @@ class ImagesTableViewController: UITableViewController {
                 return imageView
             }
         }
-        let item = DataSource.sharedInstance.mediaItems[indexPath.row]
-        imageView.image = item.image
+
+        imageView.image = items[indexPath.row].image
         
         return cell
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        let item = DataSource.sharedInstance.mediaItems[indexPath.row]
-        let image = item.image
+        let image = items[indexPath.row].image
         
         return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height
     }
@@ -75,7 +75,7 @@ class ImagesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            DataSource.sharedInstance.mediaItems..removeAtIndex(indexPath.row)
+            //Need to delete the value in items.
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 
         }
