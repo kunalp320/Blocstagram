@@ -8,24 +8,28 @@
 
 import UIKit
 
-class DataSource: NSObject {
+class DataSource {
 
     static let sharedInstance = DataSource()
-    var mediaItems = []
+    var mediaItems : [Media] = []
     
     
-    override init() {
-        super.init()
+    init() {
         self.addRandomData()
     }
     
+    
+    func delete(indexToDelete : Int) {
+        self.mediaItems.removeAtIndex(indexToDelete)
+    }
+    
     func randomStringOfLength(length : Int) -> String {
-        let alphabet  = "abcdefghijklmnopqrstuvwxyz";
+        let alphabet  = Array("abcdefghijklmnopqrstuvwxyz".characters);
         
         var s = ""
         for _ in 0..<length {
-            let r = arc4random_uniform(UInt32(alphabet.characters.count))
-            let c = (alphabet as NSString).characterAtIndex(Int(r))
+            let r = Int(arc4random_uniform(UInt32(alphabet.count)))
+            let c = alphabet[r]
             s += "\(c)"
         }
         return s
@@ -44,11 +48,10 @@ class DataSource: NSObject {
     func randomSentence() -> String {
         let wordCount = arc4random_uniform(20) + 2;
 
-        var randomSentence = ""
-        
-        for _ in 0...wordCount {
-            randomSentence += "\(randomStringOfLength(Int(arc4random_uniform(12)) + 2))"
-        }
+        let randomSentence = (0...wordCount).map({_ in
+          randomStringOfLength(Int(arc4random_uniform(12)) + 2)
+        }).joinWithSeparator("")
+    
         return randomSentence
     }
     
@@ -61,30 +64,22 @@ class DataSource: NSObject {
     }
     
     func addRandomData() {
-        var randomMediaItems : [Media]
+        var randomMediaItems : [Media] = []
         
-        for i in 1...10 {
-            let imageName = "\(i).jpg"
-            let image : UIImage? = UIImage(imageLiteral: imageName)
+        
+        let images = (1...10).map({"\($0).jpg"}).map({UIImage(named: $0)}).filter({$0 != nil}).map({$0!})
+        
+        for image in images {
+            let media = Media(image: image)
+            media.user = self.randomUser()
+            media.caption = self.randomSentence()
+                
+            let commentCount = Int(arc4random_uniform(10)) + 2
+            let randomComments = (0...commentCount).map({_ in self.randomComment()})
             
-            if image != nil {
-                let media = Media()
-                media.user = self.randomUser()
-                media.image = image
-                media.caption = self.randomSentence()
                 
-                let commentCount = Int(arc4random_uniform(10)) + 2
-                var randomComments : [Comment]
-                
-                for _ in 0...commentCount {
-                    let randomComment = self.randomComment()
-                    randomComments.append(randomComment)
-                }
-                
-                media.comments = randomComments
-                randomMediaItems.append(media)
-            }
-
+            media.comments = randomComments
+            randomMediaItems.append(media)
         }
         self.mediaItems = randomMediaItems
 

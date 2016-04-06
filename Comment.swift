@@ -6,14 +6,10 @@
 //  Copyright © 2016 bootcamp. All rights reserved.
 //
 
-class Comment: NSObject {
+class Comment  {
     
-    var idNumber : String
-    var from : User
-    var text : String
-
-    override init() {
-        super.init()
-    }
+    var idNumber : String?
+    var from : User?
+    var text : String?
     
 }

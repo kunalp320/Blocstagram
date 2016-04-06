@@ -10,7 +10,9 @@ import UIKit
 
 class ImagesTableViewController: UITableViewController {
 
-    let items = DataSource.sharedInstance.mediaItems
+    var items : [Media] {
+        return DataSource.sharedInstance.mediaItems
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,9 @@ class ImagesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath)
 
         let imageViewTag = 1234
-        var imageView = {
+        let imageView = {
+            Void -> UIImageView in
+            
             if let imageView = cell.contentView.viewWithTag(imageViewTag) as! UIImageView? {
                 return imageView
             } else {
@@ -51,7 +55,7 @@ class ImagesTableViewController: UITableViewController {
                 cell.contentView.addSubview(imageView)
                 return imageView
             }
-        }
+        }()
 
         imageView.image = items[indexPath.row].image
         
@@ -76,6 +80,7 @@ class ImagesTableViewController: UITableViewController {
         if editingStyle == .Delete {
             // Delete the row from the data source
             //Need to delete the value in items.
+            DataSource.sharedInstance.delete(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 
         }

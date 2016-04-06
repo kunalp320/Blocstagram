@@ -8,17 +8,17 @@
 
 import UIKit
 
-class Media: NSObject {
+class Media {
     
-    var idNumber : String
-    var user : User
-    var mediaURL : NSURL
-    var image : UIImage?
-    var caption : String
-    var comments = []
+    var idNumber : String?
+    var user : User?
+    var mediaURL : NSURL?
+    let image : UIImage
+    var caption : String?
+    var comments : [Comment]?
     
-    override init() {
-        super.init()
+    init(image : UIImage) {
+        self.image = image
     }
     
 }

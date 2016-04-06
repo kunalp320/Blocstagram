@@ -8,16 +8,12 @@
 
 import UIKit
 
-class User: NSObject {
+class User {
     
-    var idNumber : String
-    var userName : String
-    var fullName : String
-    var profilePictureURL : NSURL
+    var idNumber : String?
+    var userName : String?
+    var fullName : String?
+    var profilePictureURL : NSURL?
     var profilePicture : UIImage?
-    
-    override init() {
-        super.init()
-    }
-
+        
 }
