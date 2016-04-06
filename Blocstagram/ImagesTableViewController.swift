@@ -47,17 +47,19 @@ class ImagesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath)
 
         let imageViewTag = 1234
-        var imageView = cell.contentView.viewWithTag(imageViewTag) as! UIImageView?
-    
-        if let _ = imageView {
-        } else {
-            imageView = UIImageView()
-            imageView!.contentMode = .ScaleAspectFill
-            imageView!.frame = cell.contentView.bounds
-            imageView!.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-            
-            imageView!.tag = imageViewTag
-            cell.contentView.addSubview(imageView!)
+        var imageView = {
+            if let imageView = cell.contentView.viewWithTag(imageViewTag) as! UIImageView? {
+                return imageView
+            } else {
+                let imageView = UIImageView()
+                imageView.contentMode = .ScaleAspectFill
+                imageView.frame = cell.contentView.bounds
+                imageView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+                
+                imageView.tag = imageViewTag
+                cell.contentView.addSubview(imageView)
+                return imageView
+            }
         }
         
         let image = self.images[indexPath.row];
