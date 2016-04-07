@@ -11,6 +11,7 @@
 		346830911CB55627004AAAD6 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346830901CB55627004AAAD6 /* Media.swift */; };
 		346830931CB55691004AAAD6 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346830921CB55691004AAAD6 /* Comment.swift */; };
 		346830951CB556F2004AAAD6 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346830941CB556F2004AAAD6 /* DataSource.swift */; };
+		346830971CB5A921004AAAD6 /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346830961CB5A921004AAAD6 /* MediaTableViewCell.swift */; };
 		34DF1DD01CAB277400521ABB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF1DCF1CAB277400521ABB /* AppDelegate.swift */; };
 		34DF1DD71CAB277400521ABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34DF1DD61CAB277400521ABB /* Assets.xcassets */; };
 		34E4DE3B1CAB2A0100F55855 /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E4DE3A1CAB2A0100F55855 /* ImagesTableViewController.swift */; };
@@ -21,6 +22,7 @@
 		346830901CB55627004AAAD6 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Media.swift; path = ../Media.swift; sourceTree = "<group>"; };
 		346830921CB55691004AAAD6 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Comment.swift; path = ../Comment.swift; sourceTree = "<group>"; };
 		346830941CB556F2004AAAD6 /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		346830961CB5A921004AAAD6 /* MediaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 		34DF1DCC1CAB277400521ABB /* Blocstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34DF1DCF1CAB277400521ABB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34DF1DD61CAB277400521ABB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				34DF1DDB1CAB277400521ABB /* Info.plist */,
 				34E4DE3A1CAB2A0100F55855 /* ImagesTableViewController.swift */,
 				346830941CB556F2004AAAD6 /* DataSource.swift */,
+				346830961CB5A921004AAAD6 /* MediaTableViewCell.swift */,
 			);
 			path = Blocstagram;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				34E4DE3B1CAB2A0100F55855 /* ImagesTableViewController.swift in Sources */,
 				34DF1DD01CAB277400521ABB /* AppDelegate.swift in Sources */,
 				346830911CB55627004AAAD6 /* Media.swift in Sources */,
+				346830971CB5A921004AAAD6 /* MediaTableViewCell.swift in Sources */,
 				3468308F1CB555A6004AAAD6 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

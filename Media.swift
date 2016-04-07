@@ -15,7 +15,7 @@ class Media {
     var mediaURL : NSURL?
     let image : UIImage
     var caption : String?
-    var comments : [Comment]?
+    var comments : [Comment] = []
     
     init(image : UIImage) {
         self.image = image

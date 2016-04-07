@@ -8,8 +8,8 @@
 
 class Comment  {
     
-    var idNumber : String?
-    var from : User?
-    var text : String?
+    var idNumber : String = ""
+    var from : User = User()
+    var text : String = ""
     
 }

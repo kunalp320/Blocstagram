@@ -17,7 +17,7 @@ class ImagesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "imageCell")
+        self.tableView.registerClass(MediaTableViewCell.self, forCellReuseIdentifier: "mediaCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,37 +37,17 @@ class ImagesTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("imageCell", forIndexPath: indexPath)
-        let imageView = {
-            Void -> UIImageView in
-            let imageViewTag = 1234
-            if let imageView = cell.contentView.viewWithTag(imageViewTag) as! UIImageView? {
-                return imageView
-            } else {
-                let imageView = UIImageView()
-                imageView.contentMode = .ScaleAspectFill
-                imageView.frame = cell.contentView.bounds
-                imageView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-                
-                imageView.tag = imageViewTag
-                cell.contentView.addSubview(imageView)
-                return imageView
-            }
-        }()
-
-        imageView.image = items[indexPath.row].image
+        let mediaTableViewCell = tableView.dequeueReusableCellWithIdentifier("mediaCell", forIndexPath: indexPath) as! MediaTableViewCell
         
-        return cell
+        mediaTableViewCell.mediaItem = self.items[indexPath.row]
+        
+        return mediaTableViewCell
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        let image = items[indexPath.row].image
-        
-        return (CGRectGetWidth(self.view.frame) / image.size.width) * image.size.height
+        return MediaTableViewCell.heightForMediaItem(items[indexPath.row], width: CGRectGetWidth(self.view.frame))
     }
     
-
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
