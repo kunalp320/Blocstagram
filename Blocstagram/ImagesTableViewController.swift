@@ -39,6 +39,9 @@ class ImagesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let mediaTableViewCell = tableView.dequeueReusableCellWithIdentifier("mediaCell", forIndexPath: indexPath) as! MediaTableViewCell
         
+        if indexPath.row == 0 {
+            mediaTableViewCell.commentLabel.attributedText.
+        }
         mediaTableViewCell.mediaItem = self.items[indexPath.row]
         
         return mediaTableViewCell

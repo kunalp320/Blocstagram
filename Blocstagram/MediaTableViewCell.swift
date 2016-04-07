@@ -67,6 +67,7 @@ class MediaTableViewCell: UITableViewCell {
         mutableUsernameAndCaptionString.addAttribute(NSFontAttributeName, value: boldFont!.fontWithSize(usernameFontSize), range: usernameRange)
 
         mutableUsernameAndCaptionString.addAttribute(NSForegroundColorAttributeName, value: linkColor, range: usernameRange)
+        mutableUsernameAndCaptionString.addAttribute(NSKernAttributeName, value: 1.4, range: usernameRange)
 
         return mutableUsernameAndCaptionString;
     }
@@ -74,8 +75,16 @@ class MediaTableViewCell: UITableViewCell {
     func commentString() -> NSAttributedString {
         let commentString = NSMutableAttributedString()
         
+        var i = 0
         for comment in self.mediaItem.comments {
+            
             let baseString = "\(comment.from.userName) \(comment.text) \n"
+            
+            if i % 0 != 0 {
+                paragraphStyle.alignment = .Right
+            }
+            i++
+            
             var oneCommentString = NSMutableAttributedString(string: baseString, attributes: [NSFontAttributeName : lightFont!, NSParagraphStyleAttributeName : paragraphStyle])
             
             let usernameRange = baseString.rangeOfString(comment.from.userName!)
