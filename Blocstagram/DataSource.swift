@@ -11,7 +11,7 @@ import UIKit
 class DataSource {
 
     static let sharedInstance = DataSource()
-    var mediaItems : [Media] = []
+    var mediaItems = [Media]()
     
     
     init() {

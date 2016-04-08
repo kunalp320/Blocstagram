@@ -8,19 +8,39 @@
 
 import UIKit
 
+
+private let lightFont = UIFont(name: "HelveticaNeue-Thin", size: 11)
+private let boldFont = UIFont(name: "HelveticaNeue-Bold", size: 11)
+private let usernameLabelGray = UIColor(red: 0.933, green: 0.933, blue: 0.933, alpha: 1)
+private let commentLabelGray = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+private let linkColor = UIColor(red: 0.345, green: 0.314, blue: 0.427, alpha: 1)
+
 class MediaTableViewCell: UITableViewCell {
 
-    var mediaItem : Media?
+
     var mediaImageView : UIImageView
     var usernameAndCaptionLabel : UILabel
     var commentLabel : UILabel
     
-    let lightFont = UIFont(name: "HelveticaNeue-Thin", size: 11)
-    let boldFont = UIFont(name: "HelveticaNeue-Bold", size: 11)
-    let usernameLabelGray = UIColor(red: 0.933, green: 0.933, blue: 0.933, alpha: 1)
-    let commentLabelGray = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
-    let linkColor = UIColor(red: 0.345, green: 0.314, blue: 0.427, alpha: 1)
-    var paragraphStyle : NSParagraphStyle
+    var mediaItem : Media? {
+        didSet {
+            self.mediaImageView.image = mediaItem?.image ?? nil
+            self.usernameAndCaptionLabel.attributedText = self.usernameAndCaptionString()
+            self.commentLabel.attributedText = self.commentString()
+        }
+    }
+    
+    var isOrange : Bool = false {
+        didSet {
+            updateLabel()
+        }
+    }
+    
+    func updateLabel() {
+        
+    }
+    
+    var paragraphStyle : NSMutableParagraphStyle
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
 
@@ -31,7 +51,7 @@ class MediaTableViewCell: UITableViewCell {
         self.usernameAndCaptionLabel.backgroundColor = usernameLabelGray
         
         self.commentLabel = UILabel()
-        self.commentLabel.numberOfLines = 0
+        self.commentLabel.numberOfLines = 0 
         self.commentLabel.backgroundColor = commentLabelGray
 
         let mutableParagraphStyle = NSMutableParagraphStyle()
@@ -51,20 +71,25 @@ class MediaTableViewCell: UITableViewCell {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     func usernameAndCaptionString() -> NSAttributedString {
+        
+        guard let mediaItem = self.mediaItem, caption = mediaItem.caption, username = mediaItem.user?.userName else {
+            return NSAttributedString(string: "")
+        }
+        
         let usernameFontSize : CGFloat = 15
-        let baseString = "\(self.mediaItem.user!.userName) \(self.mediaItem.caption)"
         
-        var mutableUsernameAndCaptionString = NSMutableAttributedString(string: baseString, attributes: [NSFontAttributeName : lightFont!.fontWithSize(usernameFontSize), NSParagraphStyleAttributeName : paragraphStyle])
+        let baseString = "\(username) \(caption)" as NSString
         
-
+        let mutableUsernameAndCaptionString = NSMutableAttributedString(string: baseString as String, attributes: [NSFontAttributeName : lightFont!.fontWithSize(usernameFontSize), NSParagraphStyleAttributeName : paragraphStyle])
         
-        let usernameRange = baseString.rangeOfString(self.mediaItem.user!.userName!)
         
-        mutableUsernameAndCaptionString.addAttribute(NSFontAttributeName, value: boldFont!.fontWithSize(usernameFontSize), range: usernameRange)
+        let usernameRange = baseString.rangeOfString(username)
+        
+        mutableUsernameAndCaptionString.addAttribute(NSFontAttributeName, value: boldFont!.fontWithSize(usernameFontSize), range:usernameRange)
 
         mutableUsernameAndCaptionString.addAttribute(NSForegroundColorAttributeName, value: linkColor, range: usernameRange)
         mutableUsernameAndCaptionString.addAttribute(NSKernAttributeName, value: 1.4, range: usernameRange)
@@ -75,17 +100,21 @@ class MediaTableViewCell: UITableViewCell {
     func commentString() -> NSAttributedString {
         let commentString = NSMutableAttributedString()
         
+        guard let comments = self.mediaItem?.comments else {
+            return NSAttributedString(string: "")
+        }
+        
         var i = 0
-        for comment in self.mediaItem.comments {
+        for comment in comments {
             
-            let baseString = "\(comment.from.userName) \(comment.text) \n"
+            let baseString = "\(comment.from.userName) \(comment.text) \n" as NSString
             
-            if i % 0 != 0 {
+            if i % 2 != 0 {
                 paragraphStyle.alignment = .Right
             }
-            i++
+            i += 1
             
-            var oneCommentString = NSMutableAttributedString(string: baseString, attributes: [NSFontAttributeName : lightFont!, NSParagraphStyleAttributeName : paragraphStyle])
+            let oneCommentString = NSMutableAttributedString(string: baseString as String, attributes: [NSFontAttributeName : lightFont!, NSParagraphStyleAttributeName : paragraphStyle])
             
             let usernameRange = baseString.rangeOfString(comment.from.userName!)
             oneCommentString.addAttribute(NSAttachmentAttributeName, value: boldFont!, range: usernameRange)
@@ -109,25 +138,18 @@ class MediaTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if self.mediaItem == nil {
+        guard let mediaItem = self.mediaItem else {
             return
         }
         
-        let imageHeight = self.mediaItem.image.size.height / self.mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds)
+        let imageHeight = mediaItem.image.size.height / mediaItem.image.size.width * CGRectGetWidth(self.contentView.bounds)
         
         self.mediaImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight)
         
         let sizeOfUsernameAndCaptionLabel = self.sizeOfString(self.usernameAndCaptionLabel.attributedText!)
         self.usernameAndCaptionLabel.frame = CGRectMake(0, CGRectGetMaxY(self.mediaImageView.frame), CGRectGetWidth(self.contentView.bounds), sizeOfUsernameAndCaptionLabel.height)
         
-        self.separatorInset = UIEdgeInsetsMake(0, CGRectGetWidth(self.bounds) / 2.0, 0, CGRectGetWidth(self.bounds) / 2.0)
-    }
-    
-    func setMediaItem(mediaItem : Media) {
-        self.mediaItem = mediaItem
-        self.mediaImageView.image = mediaItem.image
-        self.usernameAndCaptionLabel.attributedText = self.usernameAndCaptionString()
-        self.commentLabel.attributedText = self.commentString()
+       // self.separatorInset = UIEdgeInsetsMake(0, CGRectGetWidth(self.bounds) / 2.0, 0, CGRectGetWidth(self.bounds) / 2.0)
     }
     
     class func heightForMediaItem(mediaItem : Media, width : CGFloat) -> CGFloat {
@@ -145,8 +167,4 @@ class MediaTableViewCell: UITableViewCell {
         
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }
